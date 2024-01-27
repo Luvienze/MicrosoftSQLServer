@@ -54,3 +54,17 @@ CREATE TABLE Müþteriler
 	Tel varchar(11),
 	Ýlkodu int FOREIGN KEY REFERENCES Ýller(Ýlkodu)
 )
+
+CREATE TABLE Satýþlar
+(
+	Sat_No int identity(1,1) PRIMARY KEY,
+	Tarih date
+		constraint ck_tarih
+		check(tarih<=getDate())
+		DEFAULT(getDate()),
+	Müþteri_No int FOREIGN KEY REFERENCES Müþteriler(Müþteri_No),
+	Kitap_No int FOREIGN KEY REFERENCES Kitaplar(Kitap_No),
+	Adet int 
+		constraint ck_adet
+		check(adet > 0)
+)
