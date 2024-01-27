@@ -66,7 +66,7 @@ CREATE TABLE Satýþlar
 		constraint ck_adet
 		check(adet > 0)
 )
--- /////////// INSERTLER ///////////
+-- ////////// INSERTLER //////////
 
 INSERT Ýller VALUES (54, 'Sakarya'),(81, 'Düzce'), (34, 'Ýstanbul'), (05,'Ankara'), (35,'Ýzmir')
 
