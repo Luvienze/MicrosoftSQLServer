@@ -40,3 +40,37 @@ SELECT SupplierID, ProductName FROM Products WHERE SupplierID = 4
 SELECT ProductName FROM Products WHERE ProductName not like ('Chang')
 
 --14.
+SELECT ProductName, UnitPrice FROM Products WHERE UnitPrice BETWEEN 10 AND 20
+
+--15.
+SELECT ProductName, UnitPrice FROM Products WHERE ProductName >= 'Chang' AND ProductName <= 'Longlife Tofu'
+
+--16.
+SELECT SupplierID, ProductName, UnitPrice FROM Products WHERE SupplierID = 8 AND UnitPrice <40
+
+--17.
+SELECT SupplierID, ProductName, UnitPrice FROM Products WHERE SupplierID = 8 OR SupplierID = 10
+
+--18.
+SELECT SupplierID, ProductName, UnitPrice FROM Products WHERE (SupplierID = 8 OR SupplierID= 10) AND UnitPrice >= 20
+
+--19.
+SELECT SupplierID, ProductName, UnitPrice FROM Products WHERE SupplierID = 8 OR SupplierID = 10 ORDER BY ProductName ASC
+
+--20.
+SELECT SupplierID, ProductName FROM Products WHERE NOT(SupplierID = 8)
+
+--21.
+SELECT ProductName FROM Products WHERE ProductName like 'R%' 
+
+--22.
+SELECT ProductName FROM Products WHERE ProductName like '%chef%'
+
+--23.
+SELECT ProductName FROM Products WHERE ProductName like '[sS]%'
+
+--24.
+SELECT ProductName FROM Products WHERE ProductName like 'Tof_'
+
+--25.
+SELECT ProductName FROM Products WHERE ProductName like '_kur_'
