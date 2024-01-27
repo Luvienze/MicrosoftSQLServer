@@ -192,3 +192,47 @@ AND Kitap_No IN
 --g.
 SELECT Yayýnevi_Adý FROM Yayýnevleri WHERE Yayýnevi_No IN 
 (SELECT Yayýnevi_No FROM Kitaplar WHERE Kitap_No NOT IN (SELECT Kitap_No FROM Satýþlar))
+ 
+ -- //////// JOIN ////////
+ --a 
+SELECT * FROM Satýþlar s INNER JOIN Kitaplar k
+ON s.Kitap_No = k.Kitap_No
+WHERE Kitap_Adý = 'Dune'
+
+--b.
+SELECT * FROM Satýþlar s INNER JOIN Müþteriler m
+ON s.Müþteri_No = m.Müþteri_No
+WHERE Ad = 'Eren'
+
+--c.
+SELECT Ad FROM Satýþlar s INNER JOIN Müþteriler m
+ON s.Müþteri_No = m.Müþteri_No JOIN Kitaplar k
+ON k.Kitap_No = s.Kitap_No
+WHERE Kitap_Adý = 'Dune'
+
+--d.
+SELECT Ad FROM Müþteriler m INNER JOIN Satýþlar s
+ON m.Müþteri_No = s.Müþteri_No JOIN Kitaplar k
+ON s.Kitap_No = k.Kitap_No JOIN Yayýnevleri y
+ON k.Yayýnevi_No = y.Yayýnevi_No
+WHERE Yayýnevi_Adý = 'domingo'
+
+--e.
+SELECT Count(*) FROM Satýþlar s INNER JOIN Kitaplar k
+ON s.Kitap_No = k.Kitap_No
+WHERE k.Birim_Fiyat > 100
+
+--f.
+SELECT COUNT(*) FROM Satýþlar s INNER JOIN Kitaplar k
+ON s.Kitap_No = k.Kitap_No JOIN Müþteriler m
+ON s.Müþteri_No = m.Müþteri_No JOIN Ýller i
+ON m.Ýlkodu = i.Ýlkodu
+WHERE Ýl_Adý = 'Ankara' AND Kategori = 'Programlama'
+
+--g.
+SELECT Yayýnevi_Adý FROM Yayýnevleri y LEFT JOIN Kitaplar k
+ON y.Yayýnevi_No = k.Yayýnevi_No LEFT JOIN Satýþlar s
+ON k.Kitap_No = s.Kitap_No
+GROUP BY Yayýnevi_Adý
+HAVING COUNT (s.Kitap_No) = 0 OR Count(s.Kitap_No) IS NULL
+
