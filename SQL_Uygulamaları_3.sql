@@ -69,6 +69,7 @@ CREATE TABLE Satýþlar
 -- /////////// INSERTLER ///////////
 
 INSERT Ýller VALUES (54, 'Sakarya'),(81, 'Düzce'), (34, 'Ýstanbul'), (05,'Ankara'), (35,'Ýzmir')
+
 INSERT Müþteriler VALUES
 ('Eren','Sönmez','380-5142890',54),
 ('Þamil','Keten','380-5142890',35),
