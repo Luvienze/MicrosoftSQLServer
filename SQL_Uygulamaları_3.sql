@@ -37,9 +37,7 @@ CREATE TABLE Kitaplar
 	Kategori varchar(20)
 		constraint ck_kategori
 		check(kategori in ('Programlama','Grafik-Tasarým','Networkd', 'Genel', 'Veritabaný')),
-	Adet int
-		constraint ck_adet
-		check(adet >= 0)
+	Yayýnevi_No int FOREIGN KEY REFERENCES Yayýnevleri (Yayýnevi_No)
 )
 
 CREATE TABLE Müþteriler
