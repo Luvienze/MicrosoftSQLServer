@@ -1,5 +1,3 @@
-SELECT * FROM Products
-
 --1.
 SELECT ProductName FROM Products
 
