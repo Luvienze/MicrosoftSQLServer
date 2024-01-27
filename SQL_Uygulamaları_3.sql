@@ -156,3 +156,39 @@ DELETE FROM Satýþlar WHERE Kitap_No IN (SELECT Kitap_No FROM Kitaplar WHERE Yayý
 									   (SELECT Yayýnevi_No FROM Yayýnevleri WHERE Yetkili = 'Yetkili 5'))
  
  --5.
+-- //////// ALT SORGULAR ////////
+
+--a.
+SELECT * FROM Satýþlar WHERE Kitap_No = (SELECT Kitap_No FROM Kitaplar WHERE Kitap_Adý = 'Dune')
+
+--b.
+SELECT * FROM Satýþlar WHERE Müþteri_No = (SELECT Müþteri_No FROM Müþteriler WHERE Ad = 'Eren')
+
+--c.
+SELECT Ad 
+FROM Müþteriler
+WHERE Müþteri_No IN 
+(SELECT Müþteri_No FROM Satýþlar WHERE Kitap_No = (SELECT Kitap_No FROM Kitaplar WHERE Kitap_Adý = 'Dune'))
+
+--d.
+SELECT Ad 
+FROM Müþteriler
+WHERE Müþteri_No IN
+(SELECT Müþteri_No FROM Satýþlar WHERE Kitap_No IN 
+(SELECT Kitap_No FROM Kitaplar WHERE Yayýnevi_No = 
+(SELECT Yayýnevi_No FROM Yayýnevleri WHERE Yayýnevi_Adý = 'domingo')))
+
+--e.
+SELECT COUNT(*) FROM Satýþlar WHERE Kitap_No IN 
+(SELECT Kitap_No FROM Kitaplar WHERE Birim_Fiyat >= 100)
+
+--f.
+SELECT COUNT(*) FROM Satýþlar WHERE Müþteri_No IN
+(SELECT Müþteri_No FROM Müþteriler WHERE Ýlkodu = 
+(SELECT Ýlkodu FROM Ýller WHERE Ýl_Adý = 'Ankara'))
+AND Kitap_No IN 
+(SELECT Kitap_No FROM Kitaplar WHERE Kategori = 'Programlama')
+
+--g.
+SELECT Yayýnevi_Adý FROM Yayýnevleri WHERE Yayýnevi_No IN 
+(SELECT Yayýnevi_No FROM Kitaplar WHERE Kitap_No NOT IN (SELECT Kitap_No FROM Satýþlar))
