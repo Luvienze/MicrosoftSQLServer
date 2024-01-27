@@ -108,3 +108,8 @@ INSERT Satýþlar VALUES
 (getDate(),3,4,3),
 (getDate(),3,1,1)
 
+--3.
+SELECT * FROM Müþteriler
+
+--a.
+UPDATE Müþteriler SET Soyad = 'UNKNOWN' WHERE Soyad IS NULL
