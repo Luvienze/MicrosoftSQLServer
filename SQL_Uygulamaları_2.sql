@@ -85,7 +85,6 @@ WHERE Perno = (SELECT TOP 1 Perno FROM PERSONEL WHERE Dept = 'SER' AND Baslamata
 UPDATE PERSONEL SET Dept = 'NAK', Unvan = 'ELEMAN'
 WHERE Dept IS NULL
 
-
 --5.
 
 --a.
