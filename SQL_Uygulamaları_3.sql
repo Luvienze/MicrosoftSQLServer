@@ -290,7 +290,6 @@ GO
 
 EXEC spKitapİndirim
 
-
 --f.
 CREATE PROC spEnÇokSatılan
 AS
