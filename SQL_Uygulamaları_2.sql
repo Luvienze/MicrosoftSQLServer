@@ -67,3 +67,83 @@ INSERT PERSONEL (Ýsim,Soyad,Dept,Ucret) VALUES ('Buket','Pale','ARG',2300)
 --4.
 --a 
 UPDATE PERSONEL SET Ucret += Ucret*0.15
+
+--b.
+UPDATE PERSONEL SET Ucret += Ucret*0.10 WHERE Baslamatarih <= '01.01.2005'
+
+
+--c.
+UPDATE PERSONEL SET Dept = 'SER', Unvan ='MUDUR' 
+WHERE
+Perno = (SELECT TOP 1 Perno FROM PERSONEL WHERE Dept = 'SAT' AND Baslamatarih IS NOT NULL ORDER BY Baslamatarih ASC)
+
+--d.
+DELETE FROM PERSONEL
+WHERE Perno = (SELECT TOP 1 Perno FROM PERSONEL WHERE Dept = 'SER' AND Baslamatarih IS NOT NULL ORDER BY Baslamatarih DESC)
+
+--e.
+UPDATE PERSONEL SET Dept = 'NAK', Unvan = 'ELEMAN'
+WHERE Dept IS NULL
+
+
+--5.
+
+--a.
+SELECT * FROM PERSONEL WHERE Ýsim like '___'
+
+--b.
+SELECT * FROM PERSONEL WHERE Soyad like '_____' AND Soyad like '%e%'
+
+--c.
+SELECT COUNT(*) AS Total FROM PERSONEL WHERE Dept ='SAT'
+
+--d.
+SELECT Dept, COUNT(*) AS Total FROM PERSONEL GROUP BY Dept
+
+--e.
+SELECT AVG(Ucret) AS Ortlama FROM PERSONEL WHERE Dept = 'MUH'
+
+--f.
+SELECT Dept, AVG(Ucret) FROM PERSONEL GROUP BY Dept
+
+--g.
+SELECT Ýsim FROM PERSONEL WHERE 
+Perno =(SELECT TOP 1 Perno FROM PERSONEL WHERE Dept = 'SAT' AND Baslamatarih IS NOT NULL ORDER BY Baslamatarih ASC)
+
+--h.
+SELECT Unvan, COUNT(*) as Total FROM PERSONEL GROUP BY Unvan
+
+--i.
+SELECT Unvan, AVG(Ucret) as Ortalama FROM PERSONEL GROUP BY Unvan
+
+--j.
+SELECT * FROM PERSONEL WHERE Ucret > (SELECT Ucret FROM PERSONEL WHERE Dept = 'MUH' AND Ýsim ='Recep' )
+
+--k.
+SELECT TOP 1 Perno, Ýsim, Dept, Unvan FROM PERSONEL
+WHERE Baslamatarih > (SELECT Baslamatarih FROM PERSONEL WHERE Dept='SAT' AND Ýsim = 'Eda')
+
+--l.
+SELECT Ýsim FROM PERSONEL WHERE 
+Baslamatarih > (SELECT Baslamatarih FROM PERSONEL WHERE Dept='ARG' AND Ýsim ='Ahmet')
+
+--m.
+SELECT DISTINCT Dept FROM PERSONEL 
+
+--n.
+SELECT DISTINCT Unvan FROM PERSONEL
+
+--o. 
+SELECT (SELECT AVG(Ucret) FROM PERSONEL WHERE Dept = 'MUH') - (SELECT AVG(Ucret) FROM PERSONEL WHERE Dept = 'SAT') AS Fark 
+
+--p.
+SELECT TOP 1 Ýsim FROM PERSONEL WHERE Ucret = (SELECT MAX(Ucret) FROM PERSONEL)
+
+--q.
+SELECT TOP 3 Ýsim FROM PERSONEL ORDER BY Ucret DESC 
+
+--r.
+SELECT TOP 1 Ýsim FROM PERSONEL WHERE Ucret IS NOT NULL ORDER BY Ucret ASC
+
+--s.
+SELECT TOP 3 Ýsim FROM PERSONEL WHERE Ucret IS NOT NULL ORDER BY Ucret ASC
