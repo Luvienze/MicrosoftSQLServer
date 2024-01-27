@@ -137,3 +137,22 @@ DELETE FROM Satýþlar WHERE Müþteri_No IN
 DELETE FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____'
 
 --4.
+--a.
+DELETE FROM Satýþlar WHERE Müþteri_No IN 
+(SELECT Müþteri_No FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____')
+ 
+DELETE FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____'
+
+--b.
+DELETE FROM Müþteriler WHERE Ýlkodu = (SELECT Ýlkodu FROM Ýller WHERE Ýl_Adý= 'Kars')
+
+--c.
+DELETE FROM Satýþlar WHERE Müþteri_No IN (SELECT Müþteri_No FROM Müþteriler WHERE Ýlkodu = (SELECT Ýlkodu FROM Ýller WHERE Ýl_Adý='Ankara'))
+AND Kitap_No = (SELECT Kitap_No FROM Kitaplar WHERE Kitap_Adý = 'C#')
+
+SELECT * FROM Yayýnevleri
+--d.
+DELETE FROM Satýþlar WHERE Kitap_No IN (SELECT Kitap_No FROM Kitaplar WHERE Yayýnevi_No IN 
+									   (SELECT Yayýnevi_No FROM Yayýnevleri WHERE Yetkili = 'Yetkili 5'))
+ 
+ --5.
