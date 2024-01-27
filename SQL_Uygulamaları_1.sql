@@ -139,8 +139,33 @@ VALUES ('O123','OPEL','Vectra','05.27.2008','Beyaz','DIZEL'),
 ('O129','OPEL','Astra','01.29.2002','Siyah','BENZIN'),
 ('R356','RENAULT','Megan','11.03.2002','Beyaz','KARMA'),
 ('H500','HYUNDAI','Tuscon','03.14.2005','Mavi','KARMA')
-
 --6.
 INSERT ARABALAR (aracno,marka,trafikyil,yakit)
 VALUES ('F003','FORD','01.01.2008','KARMA'),
 ('F982','FORD','03.25.2003','BENZIN')
+
+--7.
+INSERT OGRENCILER (ograd) VALUES ('Ege')
+
+--8.
+INSERT OGRENCILER (ograd, dogumtar) VALUES ('Ýrem','05.15.2002')
+
+--9.
+ALTER TABLE URUNLER
+ADD kolisekli varchar(10)
+	constraint ck_kolisekli
+	check(kolisekli in ('ADET','KG','DESTE','LITRE','SERI','GRAM'))
+
+INSERT URUNLER (urunad, kolisekli) VALUES ('kalem','GRAM')
+
+--10. 
+SET IDENTITY_INSERT URUNLER ON
+
+INSERT URUNLER (urunno,urunad) VALUES (48,'SANDALYE')
+
+SET IDENTITY_INSERT URUNLER OFF
+
+--11. 
+INSERT ARABALAR (aracno,marka, model) VALUES ('F004','FORD', 'Focus')
+
+--D
