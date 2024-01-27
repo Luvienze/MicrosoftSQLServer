@@ -169,3 +169,21 @@ SET IDENTITY_INSERT URUNLER OFF
 INSERT ARABALAR (aracno,marka, model) VALUES ('F004','FORD', 'Focus')
 
 --D
+
+--1.
+SELECT * FROM OGRENCILER
+
+--2.
+SELECT ogrno, ograd FROM OGRENCILER WHERE sýnýf = '11B'
+
+--3.
+SELECT * FROM OGRENCILER WHERE dogumyer = 'BOLU'
+
+--4.
+SELECT * FROM OGRENCILER WHERE sýnýf like '11%'
+
+--5.
+SELECT * FROM OGRENCILER WHERE ograd like '_____'
+
+--6.
+SELECT * FROM OGRENCILER WHERE sýnýf like '12%' AND alan = 'FEN'
