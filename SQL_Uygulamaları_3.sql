@@ -129,3 +129,10 @@ ADD constraint ck_webadresi
 	check(webadresi like '%.com' OR webadresi like '%.org')
 
 UPDATE Yayýnevleri SET webadresi = (REPLACE(webadresi, '.com','.org')) FROM Yayýnevleri
+
+--e.
+DELETE FROM Satýþlar WHERE Müþteri_No IN 
+(SELECT Müþteri_No FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____')
+ 
+DELETE FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____'
+
