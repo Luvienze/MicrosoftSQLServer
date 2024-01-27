@@ -106,3 +106,41 @@ ADD constraint ck_marka
 --10.
 ALTER TABLE ARABALAR
 DROP column kilo
+
+--C
+--1.
+INSERT OGRENCILER VALUES ('Eren','Sönmez','Serap Sönmez','Düzce','12A','07.29.2002','FEN','0-','Sakarya')
+INSERT OGRENCILER VALUES ('Kemal','Ceylan','Ahmet Ceylan','Adana','12C','05.21.1997','SOS','AB+','Osmaniye')
+INSERT OGRENCILER VALUES ('Duygu','Coþkun','Nermin Coþkun','Bursa','12B','02.08.2000','FEN','B+','Bursa')
+
+--2.
+INSERT OGRENCILER (ograd,ogrsoyad,veliadsoyad,adres,alan,kangrup) 
+VALUES('Burcu','Kýran','Mehmet Kýran','Bolu','TM','A-')
+
+INSERT OGRENCILER (ograd,ogrsoyad,veliadsoyad,adres,alan,kangrup) 
+VALUES('Zeynep','Derin','Ayþe Derin','Bolu','SOS','AB-')
+
+--3.
+INSERT INTO URUNLER (urunad, uruntaným, maliyetfiyat, karoran, kdv, renk)
+VALUES('Lightsaber', 'Used by Jedi', 50000,2500, 1500,'Mavi'),
+('Sonic Driver', 'Used by Time Lords', 1500, 75, 50,'Gri')
+
+INSERT INTO URUNLER (urunad, uruntaným, maliyetfiyat, karoran, kdv, renk)
+VALUES('Council Table', 'Destroyed by Palpatine and Yoda', 200, 10, 10,'Yeþil')
+
+--4.
+INSERT INTO URUNLER (urunad, uruntaným, maliyetfiyat, kdv) VALUES
+('Ornithopter', 'Chopper for Arrakis', 5000, 150),
+('Klarnet', 'Üflemeli Çalgý', 1500, 45)
+
+--5.
+INSERT ARABALAR 
+VALUES ('O123','OPEL','Vectra','05.27.2008','Beyaz','DIZEL'),
+('O129','OPEL','Astra','01.29.2002','Siyah','BENZIN'),
+('R356','RENAULT','Megan','11.03.2002','Beyaz','KARMA'),
+('H500','HYUNDAI','Tuscon','03.14.2005','Mavi','KARMA')
+
+--6.
+INSERT ARABALAR (aracno,marka,trafikyil,yakit)
+VALUES ('F003','FORD','01.01.2008','KARMA'),
+('F982','FORD','03.25.2003','BENZIN')
