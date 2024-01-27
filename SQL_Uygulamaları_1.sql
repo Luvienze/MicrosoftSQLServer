@@ -47,3 +47,62 @@ CREATE TABLE ARABALAR
 		check(yakit in('BENZIN','DIZEL','LPG','KARMA')),
 	kilo int
 )
+
+--B. 
+
+--1. 
+ALTER TABLE OGRENCILER
+ADD kangrup varchar(3)
+	constraint ck_kangrup
+	check(kangrup in ('A+','A-','B+','B-','AB+','AB-','0+','0-')) 
+
+--2.
+ALTER TABLE OGRENCILER
+ALTER column ograd varchar(15)
+
+--3.
+ALTER TABLE OGRENCILER
+ADD dogumyer varchar(20)
+
+--4.
+ALTER TABLE URUNLER
+ALTER column uruntaným varchar(40)
+
+--5.
+ALTER TABLE URUNLER
+DROP constraint ck_kolisekli,
+	 column kolisekli
+
+--6.
+ALTER TABLE URUNLER
+ADD renk varchar(10),
+	kilo int
+	constraint ck_kilo
+	check(kilo >0)
+
+--7.
+ALTER TABLE URUNLER
+DROP constraint ck_kilo
+
+ALTER TABLE URUNLER
+DROP column kilo
+
+--8. 
+ALTER TABLE ARABALAR
+DROP constraint ck_aracno
+
+ALTER TABLE ARABALAR
+ADD constraint ck_aracno
+	check(aracno like '[ORFH][0-9][0-9][0-9]')
+
+--9.
+ALTER TABLE ARABALAR
+DROP constraint ck_marka
+
+ALTER TABLE ARABALAR
+ADD constraint ck_marka
+	check(marka in ('OPEL','RENAULT','FORD','HYUNDAI'))
+
+--10.
+ALTER TABLE ARABALAR
+DROP column kilo
