@@ -108,7 +108,7 @@ INSERT Satýþlar VALUES
 (getDate(),3,4,3),
 (getDate(),3,1,1)
 
---3.
+--3. //////// GÜNCELLEMELER ////////
 SELECT * FROM Müþteriler
 
 --a.
@@ -136,7 +136,7 @@ DELETE FROM Satýþlar WHERE Müþteri_No IN
  
 DELETE FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____'
 
---4.
+--4. //////// SÝLMELER ////////
 --a.
 DELETE FROM Satýþlar WHERE Müþteri_No IN 
 (SELECT Müþteri_No FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____')
@@ -236,3 +236,79 @@ ON k.Kitap_No = s.Kitap_No
 GROUP BY Yayýnevi_Adý
 HAVING COUNT (s.Kitap_No) = 0 OR Count(s.Kitap_No) IS NULL
 
+--6 //////// STORED PROCEDURE ////////
+
+--a.
+CREATE PROC spListMüþteriler
+AS
+	SELECT * FROM Müþteriler
+GO
+
+EXEC spListMüþteriler
+
+--b.
+CREATE PROC spListKitap
+	@kitapadý varchar(20)
+AS
+	SELECT * FROM Satýþlar s INNER JOIN Kitaplar k
+	ON s.Kitap_No = k.Kitap_No
+	WHERE k.Kitap_Adý = @kitapadý
+GO
+
+EXEC spListKitap 'Dune'
+
+--c.
+CREATE PROC spListKitapSatýþToplam
+	@yayýneviadý varchar(20)
+AS
+	SELECT * FROM Satýþlar s INNER JOIN Kitaplar k
+	ON s.Kitap_No = k.Kitap_No JOIN Yayýnevleri y
+	ON k.Yayýnevi_No = y.Yayýnevi_No
+	WHERE Yayýnevi_Adý = @yayýneviadý
+GO
+
+EXEC spListKitapSatýþToplam 'domingo'
+
+--d.
+CREATE PROC spKitapZam
+	@yayýneviadý varchar(20)
+AS
+	UPDATE Kitaplar SET Birim_Fiyat += Birim_Fiyat * 0.10
+	FROM Kitaplar k LEFT JOIN Yayýnevleri y
+	ON k.Yayýnevi_No = y.Yayýnevi_No
+	WHERE y.Yayýnevi_Adý = @yayýneviadý
+GO
+
+EXEC spKitapZam 'domingo'
+
+--e.
+CREATE PROC spKitapÝndirim
+AS
+	UPDATE Kitaplar SET Birim_Fiyat -= Birim_Fiyat *0.20
+	WHERE Kitap_No NOT IN (SELECT Kitap_No FROM Satýþlar)
+GO
+
+EXEC spKitapÝndirim
+
+
+--f.
+CREATE PROC spEnÇokSatýlan
+AS
+	SELECT k.Kitap_Adý, y.Yayýnevi_Adý FROM Satýþlar s INNER JOIN Kitaplar k
+	ON s.Kitap_No = k.Kitap_No JOIN Yayýnevleri y
+	ON k.Yayýnevi_No =y.Yayýnevi_No
+	WHERE Adet = (SELECT MAX(Adet) FROM Satýþlar)
+GO
+
+EXEC spEnÇokSatýlan
+
+--g. 
+CREATE PROC spEnÇokAlýþveriþYapan
+AS
+	SELECT TOP 1 Ad FROM Müþteriler m INNER JOIN Satýþlar s
+	ON m.Müþteri_No = s.Müþteri_No
+	GROUP BY m.Ad
+	ORDER BY COUNT(*) DESC
+GO
+
+EXEC spEnÇokAlýþveriþYapan
