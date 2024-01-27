@@ -136,3 +136,4 @@ DELETE FROM Satýþlar WHERE Müþteri_No IN
  
 DELETE FROM Müþteriler WHERE Ad like '%Þ%' AND Ad like '_____'
 
+--4.
