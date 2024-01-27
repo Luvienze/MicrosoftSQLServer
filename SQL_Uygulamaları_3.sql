@@ -36,7 +36,7 @@ CREATE TABLE Kitaplar
 		DEFAULT(getDate()),
 	Kategori varchar(20)
 		constraint ck_kategori
-		check(kategori in ('Programlama','Grafik-Tasarým','Networkd', 'Genel', 'Veritabaný')),
+		check(kategori in ('Programlama','Grafik-Tasarým','Network', 'Genel', 'Veritabaný')),
 	Yayýnevi_No int FOREIGN KEY REFERENCES Yayýnevleri (Yayýnevi_No)
 )
 
@@ -66,7 +66,7 @@ CREATE TABLE Satýþlar
 		constraint ck_adet
 		check(adet > 0)
 )
--- ///////// INSERTLER /////////
+-- //////// INSERTLER ////////
 
 INSERT Ýller VALUES (54, 'Sakarya'),(81, 'Düzce'), (34, 'Ýstanbul'), (05,'Ankara'), (35,'Ýzmir')
 
@@ -107,3 +107,4 @@ INSERT Satýþlar VALUES
 (getDate(),3,6,2),
 (getDate(),3,4,3),
 (getDate(),3,1,1)
+
