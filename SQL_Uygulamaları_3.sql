@@ -113,3 +113,19 @@ SELECT * FROM Müþteriler
 
 --a.
 UPDATE Müþteriler SET Soyad = 'UNKNOWN' WHERE Soyad IS NULL
+
+--b.
+SELECT UPPER(LEFT(Yayýnevi_Adý,1)) + LOWER(SUBSTRING(Yayýnevi_Adý,2, LEN(Yayýnevi_Adý))) FROM Yayýnevleri
+
+--c.
+SELECT UPPER(Kitap_Adý) FROM Kitaplar
+
+--d.
+ALTER TABLE Yayýnevleri
+DROP constraint ck_webadresi
+
+ALTER TABLE Yayýnevleri
+ADD constraint ck_webadresi
+	check(webadresi like '%.com' OR webadresi like '%.org')
+
+UPDATE Yayýnevleri SET webadresi = (REPLACE(webadresi, '.com','.org')) FROM Yayýnevleri
