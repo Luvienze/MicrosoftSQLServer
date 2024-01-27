@@ -41,3 +41,16 @@ CREATE TABLE Kitaplar
 		constraint ck_adet
 		check(adet >= 0)
 )
+
+CREATE TABLE Müþteriler
+(
+	Müþteri_No int identity(1,1) PRIMARY KEY,
+	Ad varchar(20)
+		constraint ck_ad
+		check(ad like '%[^a-zA-Z]%'),
+	Soyad varchar(20)
+		constraint ck_soyad
+		check(soyad like '%[^a-zA-Z]%'),
+	Tel varchar(11),
+	Ýlkodu int FOREIGN KEY REFERENCES Ýller(Ýlkodu)
+)
