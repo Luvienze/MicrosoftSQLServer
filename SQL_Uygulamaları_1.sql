@@ -168,6 +168,7 @@ SET IDENTITY_INSERT URUNLER OFF
 --11. 
 INSERT ARABALAR (aracno,marka, model) VALUES ('F004','FORD', 'Focus')
 
+
 --D
 
 --1.
